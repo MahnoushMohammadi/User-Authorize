@@ -37,13 +37,33 @@ try {
          $_SESSION["isAdmin"] = true;
 
     }elseif ($count == 5 && $loginPassword != $result["password"]) {
-         $status->wasSuccessful = true;
+         $status->wasSuccessful = false;
          $status->userPass = false;
          $status->userType = $result["role"];
          $status->userStatus = $result["ustatus"];
          $status->userId = $result["iduser"];
          $_SESSION["userlogin"] = $result["iduser"];
          $_SESSION["isLoggedIn"] = true;
+         $_SESSION["isAdmin"] = true; 
+
+    }elseif ($count == 5 && $loginPassword == $result["password"]) {
+         $status->wasSuccessful = true;
+         $status->userPass = true;
+         $status->userType = $result["role"];
+         $status->userStatus = $result["ustatus"];
+         $status->userId = $result["iduser"];
+         $_SESSION["userlogin"] = $result["iduser"];
+         $_SESSION["isLoggedIn"] = true;
+         $_SESSION["isAdmin"] = false;   
+    }
+    elseif ($count == 5 && $loginPassword != $result["password"]) {
+         $status->wasSuccessful = false;
+         $status->userPass = false;
+         $status->userType = $result["role"];
+         $status->userStatus = $result["ustatus"];
+         $status->userId = $result["iduser"];
+         $_SESSION["userlogin"] = $result["iduser"];
+         $_SESSION["isLoggedIn"] = false;
          $_SESSION["isAdmin"] = false;   
     }
 
